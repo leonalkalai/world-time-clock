@@ -7,7 +7,6 @@ window.addEventListener("load",()=> {
 let info = $('#info');
 let errormessage = $('#errormessage');
 const api_key = 'K94T6QNCY3IC';
-let countrytime, finaltime, countryname, zonename, countrycode, unixtimestamp;
 function getLocation(){
     fetch(`https://api.timezonedb.com/v2.1/list-time-zone?key=${api_key}&format=json`)
     .then( res => {
@@ -25,11 +24,11 @@ function getLocation(){
 
 function displayData(data) {
   for (let key in data.zones){
-    countryname = data.zones[key].countryName;
-    countrycode = data.zones[key].countryCode;
-    zonename = data.zones[key].zoneName;
-    unixtimestamp = data.zones[key].timestamp;
-    countrytime = new Date(unixtimestamp*1000);
+    let countryname = data.zones[key].countryName;
+    let countrycode = data.zones[key].countryCode;
+    let zonename = data.zones[key].zoneName;
+    let unixtimestamp = data.zones[key].timestamp;
+    let countrytime = new Date(unixtimestamp*1000);
     $('#info').append(`
         <div class="list-group shadow">
         <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
@@ -50,16 +49,16 @@ function displayData(data) {
 
 
 function updateTime() {
+  setInterval(function() {
     $(".changetimer").each(function(i,el){
     let datakey = Object.keys($(el).data())[0];
-    setInterval(function() {
-            countrytime = $(el).data(datakey);
-            finaltime = new Date(countrytime);
-            finaltime.setSeconds(finaltime.getSeconds() + 1);
-            $(el).data('countrytime',finaltime);
-            $(el).html(finaltime.toISOString().split('G')[0].split('T')[1].split('.')[0])
-    }, 1000); 
-})
+    let countrytime = $(el).data(datakey);
+    let finaltime = new Date(countrytime);
+    finaltime.setSeconds(finaltime.getSeconds() + 1);
+    $(el).data('countrytime',finaltime);
+    $(el).html(finaltime.toISOString().split('G')[0].split('T')[1].split('.')[0])
+    })
+}, 1000); 
 }
 
 
