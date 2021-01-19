@@ -1,5 +1,10 @@
 "use strict";
 
+window.addEventListener("load",()=> { //execute when the page is fully loaded
+    getLocation().then(data => { Promise.all([displayData(data) ,updateTime()])}).catch( err => {errormessage.innerHTML = `${err}`;}); // executes main function with an array of functions as promise
+})
+
+
 const info = $('#info'); // declare selector as const for optimization
 let errormessage = $('#errormessage'); // declare selector to show error
 const api_key = 'K94T6QNCY3IC'; //  declare fetch key as const
@@ -61,9 +66,6 @@ const updateTime = () => {
 }
 
 
-window.addEventListener("load",()=> { //execute when the page is fully loaded
-    getLocation().then(data => { Promise.all([displayData(data) ,updateTime()])}).catch( err => {errormessage.innerHTML = `${err}`;}); // executes main function with an array of functions as promise
-})
 
 
 
