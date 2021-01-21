@@ -13,18 +13,20 @@ const getTimezone = async ()=>{
 }
 
 //function to show data
-const displayData = (data) => {
+const displayData = (data) => { 
   for (let key in data.zones){
+    data.zones.indexOf("Macedonia") >= 0 ? data.zones[key].countryName = 'Skopje' : data.zones[key].countryName;
     const countryname = data.zones[key].countryName;//||||||
     const countrycode = data.zones[key].countryCode;//||||||
     const zonename = data.zones[key].zoneName;      //||||||--->data variables
     const unixtimestamp = data.zones[key].timestamp; //|||||
     const countrytime = new Date(unixtimestamp*1000);//|||||
+    let randomCountryName = data.zones[Math.floor(Math.random()*data.zones.length)]; // create random countryname for mixUp search
     const dataText = `
-    <div class="list-group shadow">
+    <div class="list-group shadow mix ${randomCountryName.countryName}"> 
             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
             <div class="d-flex flex-row w-100 justify-content-between align-items-center backgreen">
-            <div class="w-50">  
+            <div class="w-50 countryname">  
                 <h5 class="align-middle mb-1"><img src="https://www.countryflags.io/${countrycode}/flat/64.png">${countryname}</h5>
                 <p>${zonename}</p>
             </div>  
@@ -37,18 +39,7 @@ const displayData = (data) => {
     `;
      //return data html
     info.append(dataText); //append html
-    MadedoniaIsGreek()
     }
-}
-//fix Macedonia name to Skopje---- Macedonia is one and in Greece!!!!
-function MadedoniaIsGreek(){ 
-    const $el = $("h5");
-    $el.each(function (i, el) {
-      let countryname = $(el).html();
-      if (countryname.indexOf("Macedonia") >= 0) {
-       $(el).html(`<img src="https://www.countryflags.io/MK/flat/64.png"> Skopje`);
-    }
-    }); 
 }
 
 //function to update time 
@@ -66,6 +57,7 @@ const updateTime = () => {
       });
     }, 100); //end interval
 }
+
 
 window.addEventListener("load",()=> { //execute when the page is fully loaded
     getTimezone()
