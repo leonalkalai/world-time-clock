@@ -15,7 +15,7 @@ const getTimezone = async ()=>{
 //function to show data
 const displayData = (data) => { 
   for (let key in data.zones){
-    data.zones.indexOf("Macedonia") >= 0 ? data.zones[key].countryName = 'Skopje' : data.zones[key].countryName;
+    data.zones[key].countryName.indexOf("Macedonia") >= 0 ? data.zones[key].countryName = 'Skopje' : data.zones[key].countryName;
     const countryname = data.zones[key].countryName;//||||||
     const countrycode = data.zones[key].countryCode;//||||||
     const zonename = data.zones[key].zoneName;      //||||||--->data variables
