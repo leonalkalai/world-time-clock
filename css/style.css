@@ -29,6 +29,10 @@ p{
 h5,small{
   padding: 5px;
 }
+.countryname > h5 > img{
+    height:auto;
+    width:64px;       
+}    
 small {
   font-size: 1.875em;
 }
