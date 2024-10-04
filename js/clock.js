@@ -27,7 +27,7 @@ const displayData = (data) => {
             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
             <div class="d-flex flex-row w-100 justify-content-between align-items-center backgreen">
             <div class="w-50 countryname">  
-                <h5 class="align-middle mb-1"><img src="./svg/${countrycode}">${countryname}</h5>
+                <h5 class="align-middle mb-1"><img src=`./svg/${countrycode}.svg`>${countryname}</h5>
                 <p>${zonename}</p>
             </div>  
             <div class="w-50 backyellowgreen">
